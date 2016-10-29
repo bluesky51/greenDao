@@ -1,0 +1,37 @@
+数据操作前的准备工作：
+ //参数2:数据库的名称
+1》根据DaoMaster得到DaoSession对象，例如： DaoSession daoSession = DaoMaster.newDevSession(ctx, "1019");
+//获取实体类对应的表
+1》根据DaoSession得到实体类的访问对象Dao，例如：StudentDao studentDao = daoSession.getStudentDao();
+                                          productDao = daoSession.getProductDao();
+1.插入说明如下：
+//可以插入多次，但是相同的数据只是替换新值；没有的数据也就是不同数据插入
+批量插入： TDao.insertOrReplaceInTx(List<T> list);
+单条插入：TDao.insertOrReplace(T t); T代表实体类对象的名称
+2.排序查询数据说明树下：
+先QueryBuilder<Product> builder = productDao.queryBuilder();
+再使用QueryBuilder进行数据排序查询条件关键如右：builder.orderDesc("列名");递减排序
+                                        builder.orderAsc("列名");递增排序
+3。分页查询数据说明如下：
+先QueryBuilder<Product> builder = productDao.queryBuilder();
+再使用QueryBuilder进行分页数据查询条件关键如右：//offset(m).limit(n)从第m个数开始查询，查询n条数据
+4.模糊查询搜索模块如下说明：
+先QueryBuilder<Product> builder = productDao.queryBuilder();
+再使用QUeryBuilder进行模糊查询条件关键如右：where(ProductDao.Properties.Name.like("%" + key + "%"))
+5.
+
+6.
+
+
+备注：SearchView的基本使用：
+  1.xml布局介绍：
+  基本属性介绍：
+      <!--app:iconifiedByDefault设置搜索框是否展开，默认true,true :折叠未展开效果(只有一个图标，需要点击图标才可展开搜索框)
+                                                    false:展开效果，图标在搜索框的外面-->
+      <!--app:closeIcon修改删除图标按钮(x)-->
+      <!--app:defaultQueryHint设置搜索框需要输入的内容提示信息-->
+      <!--app:queryBackground设置搜索框的背景颜色-->
+      <!--app:searchIcon设置搜索框的搜索图标(放大镜)-->
+  2.java代码监听：setOnQueryTextListener：重点在 该onQueryTextChange(String newText)方法中操作
+
+
